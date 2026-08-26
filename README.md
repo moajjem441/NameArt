@@ -55,3 +55,109 @@ app/
 ├── PixelLetter.tsx    # Renders a single pixel-art letter
 ├── letters.ts         # A-Z letter patterns using 2D arrays
 └── globals.css        # Animation keyframes and custom styles
+
+
+
+
+⚙️ How It Works
+1. Letter Patterns
+
+Letter patterns are stored in letters.ts as 2D arrays.
+
+Each array contains 0 and 1 values:
+
+1 → Active pixel
+0 → Empty space
+
+Example:
+
+M: [
+  [1, 0, 0, 0, 1],
+  [1, 1, 0, 1, 1],
+  [1, 0, 1, 0, 1],
+  [1, 0, 0, 0, 1],
+  [1, 0, 0, 0, 1],
+],
+2. Pixel Rendering
+
+PixelLetter.tsx converts the matrix into visual pixel blocks.
+
+For every cell:
+
+1 → Render pixel
+0 → Render empty cell
+
+Each active pixel receives:
+
+A calculated gradient color
+An animation delay
+A neon glow effect
+
+The animation delay is calculated according to the pixel's position so that the pixels appear sequentially.
+
+3. Main Animation Logic
+
+The main logic is handled inside page.tsx.
+
+The animation flow is:
+
+User types name
+      ↓
+Debounce 500ms
+      ↓
+Commit name
+      ↓
+Pixel-by-pixel fill animation
+      ↓
+Complete name displayed
+      ↓
+Wait
+      ↓
+Letters orbit around a circle
+      ↓
+Orbit animation finishes
+      ↓
+Letters return to original position
+Debouncing
+
+The user can type normally without restarting the animation on every keystroke.
+
+The name is committed only after the user stops typing for 500ms.
+
+Typing...
+  ↓
+500ms without typing
+  ↓
+Start animation
+Timing Calculation
+
+The application calculates the total animation duration based on:
+
+Number of letters
+Number of active pixels
+Pixel fill speed
+Animation delays
+
+This allows the orbit animation to start at the correct time.
+
+Phase Management
+
+The animation uses different phases:
+
+idle
+ ↓
+filling
+ ↓
+waiting
+ ↓
+orbiting
+ ↓
+idle
+
+useEffect and setTimeout are used to control the transitions between these phases.
+
+
+
+
+
+
