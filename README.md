@@ -2,7 +2,7 @@
 
 **NameArt** is an interactive Next.js web app where users can type their name and watch each letter appear in pixel-art style. The letters are gradually filled pixel by pixel, then move around in a circular orbit before returning to their original position.
 
-🚀 **Live Demo:** [Vercel Deployment](https://vercel.com/moajjems-projects)  
+🚀 **Live Demo:** [Vercel Deployment](https://nameart.vercel.app)  
 📦 **Repository:** [GitHub - NameArt](https://github.com/moajjem441/NameArt)
 
 ---
