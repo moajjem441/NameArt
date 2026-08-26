@@ -158,6 +158,21 @@ useEffect and setTimeout are used to control the transitions between these phase
 
 
 
+4. Orbit Animation
 
+The orbit effect is created using CSS transforms.
+
+Each letter receives a different starting angle:
+
+rotate(angle)
+  → translateX(orbit-radius)
+  → rotate(-angle)
+
+The final rotate(-angle) keeps the letters upright instead of rotating them along with the orbit.
+
+CSS custom properties are used for responsive orbit values:
+
+--start-angle
+--orbit-radius
 
 

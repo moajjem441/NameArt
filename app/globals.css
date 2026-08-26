@@ -131,7 +131,7 @@
 
 
 
-@keyframes pixel-fill {
+/* @keyframes pixel-fill {
   0% {
     opacity: 0;
     transform: scale(0.6);
@@ -162,4 +162,65 @@
   animation-name: orbit;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes pixel-fill {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.animate-pixel-fill {
+  animation: pixel-fill 0.3s ease-out forwards;
+}
+
+@keyframes orbit {
+  0% {
+    transform: rotate(var(--start-angle)) translateX(var(--orbit-radius))
+      rotate(calc(-1 * var(--start-angle)));
+  }
+  100% {
+    transform: rotate(calc(var(--start-angle) + 360deg))
+      translateX(var(--orbit-radius))
+      rotate(calc(-1 * (var(--start-angle) + 360deg)));
+  }
+}
+.animate-orbit {
+  animation-name: orbit;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes character-in {
+  0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-character-in {
+  animation: character-in 0.5s ease-out forwards;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-25deg); }
+  75% { transform: rotate(15deg); }
+}
+.animate-wave {
+  animation: wave 0.6s ease-in-out infinite;
+}
+
+@keyframes talk {
+  0%, 100% { ry: 8; }
+  50% { ry: 3; }
+}
+.animate-talk {
+  animation: talk 0.15s ease-in-out infinite;
 }
