@@ -61,3 +61,70 @@ export default function PixelLetter({
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//after using gradient
+
+// type PixelLetterProps = {
+//   pattern: number[][];
+//   baseDelay?: number;
+//   fillSpeed?: number;
+//   topColor?: string;
+//   bottomColor?: string;
+// };
+
+// export default function PixelLetter({
+//   pattern,
+//   baseDelay = 0,
+//   fillSpeed = 60,
+//   topColor = "#22d3ee",
+//   bottomColor = "#a855f7",
+// }: PixelLetterProps) {
+//   return (
+//     <div className="grid grid-cols-5 gap-[2px] sm:gap-1">
+//       {pattern.map((row, rowIndex) =>
+//         row.map((cell, cellIndex) => {
+//           const pixelOrder = rowIndex * row.length + cellIndex;
+
+//           return (
+//             <div
+//               key={`${rowIndex}-${cellIndex}`}
+//               className={`h-2.5 w-2.5 sm:h-4 sm:w-4 md:h-5 md:w-5 rounded-sm ${
+//                 cell === 1
+//                   ? "opacity-0 animate-pixel-fill"
+//                   : "bg-transparent"
+//               }`}
+//               style={
+//                 cell === 1
+//                   ? {
+//                       background: `linear-gradient(to bottom, ${topColor}, ${bottomColor})`,
+//                       boxShadow: `0 0 4px ${topColor}`,
+//                       animationDelay: `${
+//                         baseDelay + pixelOrder * fillSpeed
+//                       }ms`,
+//                     }
+//                   : undefined
+//               }
+//             />
+//           );
+//         })
+//       )}
+//     </div>
+//   );
+// }
