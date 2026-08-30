@@ -97,7 +97,7 @@ export default function Home() {
     if (typeof window === "undefined" || !window.speechSynthesis) return;
     window.speechSynthesis.cancel();
 
-    const utterance = new SpeechSynthesisUtterance(`Hello, ${nameToSpeak}! kemon achen`);
+    const utterance = new SpeechSynthesisUtterance(`Hello, ${nameToSpeak}!Ami Bolt. Apni kemon achen`);
     utterance.rate = 0.95;
     utterance.pitch = 1.1;
 

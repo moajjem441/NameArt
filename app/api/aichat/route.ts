@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import Groq from "groq-sdk";
 
+
 export async function POST(req: Request) {
+  
   try {
     const apiKey = process.env.GROQ_API_KEY;
 
@@ -29,7 +31,9 @@ export async function POST(req: Request) {
       model: "openai/gpt-oss-120b",
     });
 
+
     const reply = completion.choices[0]?.message?.content || "No response generated.";
+
 
     return NextResponse.json({ reply });
   } catch (error: any) {
