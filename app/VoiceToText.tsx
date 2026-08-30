@@ -391,6 +391,7 @@ export default function VoiceToText() {
                 <p className="text-sm leading-relaxed text-slate-200">{text}</p>
               </div>
             )}
+            
 
             {/* AI Response Block */}
             {reply && (
