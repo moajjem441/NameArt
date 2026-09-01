@@ -9,6 +9,7 @@ An interactive Next.js web application where names come to life in a glowing pix
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
+
 ---
 
 ## 🚀 Live Demo & Preview
