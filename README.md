@@ -1,49 +1,46 @@
-# ✨ NameArt
+Markdown
+# 🎨 NameArt
 
-**NameArt** is an interactive Next.js web app where users can type their name and watch each letter appear in pixel-art style. The letters are gradually filled pixel by pixel, then move around in a circular orbit before returning to their original position.
+An interactive Next.js web application where names come to life in a glowing pixel-art style. Letters fill up sequentially pixel-by-pixel, smoothly transition through vibrant gradients, and perform a synchronized 3D circular orbit before settling into place.
 
-🚀 **Live Demo:** [Vercel Deployment](https://nameart.vercel.app)  
-📦 **Repository:** [GitHub - NameArt](https://github.com/moajjem441/NameArt)
+[![Next.js](https://img.shields.io/badge/Next.js-16+-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19+-blue?style=flat-square&logo=react)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4+-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 
 ---
 
-## 🎯 Features
+## 🚀 Live Demo & Preview
 
-- 🟦 **Pixel-Art Letter Rendering**
-  - Each letter is rendered using a 5-column pixel grid pattern.
-  - Active cells are displayed as individual pixel blocks.
+- **Live URL:** [name-art.vercel.app](https://your-vercel-link.vercel.app)
+- **Repository:** [github.com/moajjem441/NameArt](https://github.com/moajjem441/NameArt)
 
-- ✨ **Sequential Fill-Up Animation**
-  - Pixels appear one by one.
-  - Animation progresses from top-to-bottom and left-to-right.
+<!-- Add your demo gif / screenshot here -->
+<!-- ![NameArt Preview](./public/preview.gif) -->
 
-- 🌈 **Position-Based Gradient**
-  - Pixel colors smoothly transition from the top color to the bottom color.
-  - Example: Cyan → Purple.
+---
 
-- 💡 **Neon Glow Effect**
-  - Active pixels have a subtle dynamic glow using `box-shadow`.
-  - Creates a futuristic neon-style appearance.
+## 🎯 Key Features
 
-- 🌀 **Orbit Animation**
-  - After the complete name is displayed, each letter moves around a circular orbit.
-  - Letters remain upright while orbiting.
-  - After the animation finishes, letters return to their original positions.
+- 🟦 **5x5 Pixel Grid Rendering:** Letters are constructed using custom 2D binary matrix arrays (`0` for empty, `1` for active pixels).
+- ✨ **Sequential Fill Animation:** Cascading top-to-bottom, left-to-right pixel appearance with dynamic timing calculations.
+- 🌈 **Dynamic Color Gradients:** Smooth vertical gradient transitions (e.g., Neon Cyan $\rightarrow$ Purple).
+- 💡 **Neon Glow FX:** Subtle CSS `box-shadow` layers delivering a clean cyberpunk aesthetic.
+- 🌀 **Synchronized Orbit Physics:** Letters travel along a circular trajectory while counter-rotating to remain upright (`rotate` $\rightarrow$ `translateX` $\rightarrow$ `rotate(-angle)`).
+- ⏱️ **Debounced Input (500ms):** Smooth typing experience without animation interruption mid-word.
+- ␠ **Full Multi-Word Support:** Clean spacing algorithms for first, middle, and last names.
+- 📱 **Responsive Viewport Scaling:** Dynamic CSS variables (`--orbit-radius`, pixel size, and spacing) adapting seamlessly across mobile, tablet, and desktop screens.
 
-- ⏱️ **Debounced Input**
-  - Animation does not restart while the user is actively typing.
-  - Animation starts only after the user stops typing for 500ms.
+---
 
-- 🔁 **Replay Button**
-  - Allows users to replay the complete animation sequence with one click.
+## 🛠️ Tech Stack
 
-- ␠ **Space Handling**
-  - Supports multi-word names such as `Moajjem Hossain`.
-  - Proper spacing is maintained between words.
-
-- 📱 **Fully Responsive**
-  - Optimized for mobile, tablet, and desktop screens.
-  - Pixel size, spacing, and orbit radius adjust according to screen size.
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS & Vanilla CSS Animations
+- **Icons:** Lucide React
+- **Deployment:** Vercel
 
 ---
 
@@ -51,26 +48,16 @@
 
 ```text
 app/
-├── page.tsx           # Main Home component and animation logic
-├── PixelLetter.tsx    # Renders a single pixel-art letter
-├── letters.ts         # A-Z letter patterns using 2D arrays
-└── globals.css        # Animation keyframes and custom styles
-
-
-
-
+├── globals.css        # CSS keyframes, neon glow utilities & orbit math
+├── layout.tsx         # Root application layout & metadata
+├── letters.ts         # A-Z 2D binary matrix letter definitions
+├── page.tsx           # State management, debouncing & phase orchestration
+└── PixelLetter.tsx    # Letter component & gradient calculation logic
 ⚙️ How It Works
-1. Letter Patterns
+1. Matrix Grid Pattern (letters.ts)
+Each character is stored as a 5-column binary matrix:
 
-Letter patterns are stored in letters.ts as 2D arrays.
-
-Each array contains 0 and 1 values:
-
-1 → Active pixel
-0 → Empty space
-
-Example:
-
+TypeScript
 M: [
   [1, 0, 0, 0, 1],
   [1, 1, 0, 1, 1],
@@ -78,101 +65,42 @@ M: [
   [1, 0, 0, 0, 1],
   [1, 0, 0, 0, 1],
 ],
-2. Pixel Rendering
+2. State & Phase Pipeline
+The animation engine transitions through strict chronological phases:
 
-PixelLetter.tsx converts the matrix into visual pixel blocks.
+Plaintext
+[ Typing Name ]
+       │ (500ms Debounce)
+       ▼
+    [ IDLE ] ──► [ FILLING ] ──► [ WAITING ] ──► [ ORBITING ] ──► [ SETTLED ]
+3. Upright Orbit Calculation
+To prevent letters from flipping upside down during circular movement, a reverse angle counter-rotation is applied:
 
-For every cell:
+CSS
+transform: rotate(var(--start-angle)) translateX(var(--orbit-radius)) rotate(calc(-1 * var(--start-angle)));
+💻 Getting Started Locally
+Prerequisites
+Node.js 18.x or later
 
-1 → Render pixel
-0 → Render empty cell
+npm, pnpm, or yarn
 
-Each active pixel receives:
+Installation
+Clone the repository:
 
-A calculated gradient color
-An animation delay
-A neon glow effect
+Bash
+git clone [https://github.com/moajjem441/NameArt.git](https://github.com/moajjem441/NameArt.git)
+cd NameArt
+Install dependencies:
 
-The animation delay is calculated according to the pixel's position so that the pixels appear sequentially.
+Bash
+npm install
+Run development server:
 
-3. Main Animation Logic
+Bash
+npm run dev
+Open http://localhost:3000 in your browser.
 
-The main logic is handled inside page.tsx.
+👨‍💻 Author
+Moajjem Hossain
 
-The animation flow is:
-
-User types name
-      ↓
-Debounce 500ms
-      ↓
-Commit name
-      ↓
-Pixel-by-pixel fill animation
-      ↓
-Complete name displayed
-      ↓
-Wait
-      ↓
-Letters orbit around a circle
-      ↓
-Orbit animation finishes
-      ↓
-Letters return to original position
-Debouncing
-
-The user can type normally without restarting the animation on every keystroke.
-
-The name is committed only after the user stops typing for 500ms.
-
-Typing...
-  ↓
-500ms without typing
-  ↓
-Start animation
-Timing Calculation
-
-The application calculates the total animation duration based on:
-
-Number of letters
-Number of active pixels
-Pixel fill speed
-Animation delays
-
-This allows the orbit animation to start at the correct time.
-
-Phase Management
-
-The animation uses different phases:
-
-idle
- ↓
-filling
- ↓
-waiting
- ↓
-orbiting
- ↓
-idle
-
-useEffect and setTimeout are used to control the transitions between these phases.
-
-
-
-4. Orbit Animation
-
-The orbit effect is created using CSS transforms.
-
-Each letter receives a different starting angle:
-
-rotate(angle)
-  → translateX(orbit-radius)
-  → rotate(-angle)
-
-The final rotate(-angle) keeps the letters upright instead of rotating them along with the orbit.
-
-CSS custom properties are used for responsive orbit values:
-
---start-angle
---orbit-radius
-
-
+GitHub: @moajjem441
