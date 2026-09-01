@@ -13,11 +13,8 @@ An interactive Next.js web application where names come to life in a glowing pix
 
 ## 🚀 Live Demo & Preview
 
-- **Live URL:** [name-art.vercel.app](https://your-vercel-link.vercel.app)
-- **Repository:** [github.com/moajjem441/NameArt](https://github.com/moajjem441/NameArt)
-
-<!-- Add your demo gif / screenshot here -->
-<!-- ![NameArt Preview](./public/preview.gif) -->
+- **Live URL:** [https://nameart.vercel.app](https://nameart.vercel.app)
+- **Repository:** [GitHub - NameArt](https://github.com/moajjem441/NameArt)
 
 ---
 
