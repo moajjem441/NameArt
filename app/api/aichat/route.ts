@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       );
     }
 
+
     const groq = new Groq({ apiKey });
     const { message } = await req.json();
 
@@ -36,7 +37,9 @@ export async function POST(req: Request) {
 
 
     return NextResponse.json({ reply });
-  } catch (error: any) {
+  } catch (error: any)
+  
+  {
     console.error("Groq API Error:", error);
     return NextResponse.json(
       { reply: "An error occurred while fetching the response." },
