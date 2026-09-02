@@ -322,6 +322,7 @@ export default function Character({ isTalking }: CharacterProps) {
         {/* Lighting Atmosphere */}
         <Environment preset="night" />
 
+
         {/* Controls */}
         <OrbitControls
           enablePan={false}
